@@ -59,7 +59,7 @@
             </div>
             <div class="col-xs-9 col-xs-offset-1">
                 <blockquote ng-repeat="comment in dish.comments | orderBy:orderByText">
-                    <p>{{comment.rating}} Stars</p>
+                    <p>{{comment.rating}} rating</p>
                     <p>{{comment.comment}}</p>
                     <footer>
                         {{comment.author}}
@@ -69,9 +69,9 @@
                 </blockquote>
             </div>
             <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
-              <p> Name {{userComment.name }}</p>
-              <p> Stars {{userComment.stars }}</p>
-                <p> Comments {{userComment.comments}}</p>
+              <p> Name {{userComment.author }}</p>
+              <p> rating {{userComment.rating }}</p>
+                <p> Comments {{userComment.comment}}</p>
 
 
                 <ul class="list-unstyled">
@@ -80,41 +80,43 @@
                 </ul>
                 <form class="form-horizontal" role="form" id="commentForm" name="commentForm" ng-submit="submitComment()" novalidate>
                     <!-- start -->
-                    <div class="form-group">
-                        <label class="col-xs-12 col-sm-3 control-label" for="yourName">Your Name</label>
+                    <div class="form-group" ng-class="{ 'has-error has-feedback' : commentForm.author.$error.required && !commentForm.$pristine }">
+                        <label class="col-xs-12 col-sm-3 control-label" for="author">Your Name</label>
                         <div class="col-xs-12 col-sm-9">
-                        <input type="text" class="form-control" id="yourName" ng-model="userComment.name" >
+                        <input type="text" class="form-control" id="author" name="author" ng-model="userComment.author" required >
+                        <span ng-show="commentForm.author.$error.required && !commentForm.$pristine" class="help-block">Your Name is required.</span>
                       </div>
                     </div>
                     <fieldset class="form-group">
-                        <label class="col-xs-12 col-sm-3 control-label">Number of Stars</label>
+                        <label class="col-xs-12 col-sm-3 control-label">Number of rating</label>
                         <div class="radio col-xs-12 col-sm-9">
                             <label class="radio-inline">
-                                  <input type="radio" class="form-check-input" name="Stars" id="stars1" value="1" ng-model="userComment.stars">1
+                                  <input type="radio" class="form-check-input" name="rating" id="rating1" value="1" ng-model="userComment.rating">1
                               </label>
                             <label class="radio-inline">
-                                  <input type="radio" class="form-check-input" name="Stars" id="stars2" value="2" ng-model="userComment.stars">2
+                                  <input type="radio" class="form-check-input" name="rating" id="rating2" value="2" ng-model="userComment.rating">2
                               </label>
                             <label class="radio-inline">
-                                  <input type="radio" class="form-check-input" name="Stars" id="stars3" value="3" ng-model="userComment.stars">3
+                                  <input type="radio" class="form-check-input" name="rating" id="rating3" value="3" ng-model="userComment.rating">3
                               </label>
                             <label class="radio-inline">
-                                  <input type="radio" class="form-check-input" name="Stars" id="stars4" value="4" ng-model="userComment.stars">4
+                                  <input type="radio" class="form-check-input" name="rating" id="rating4" value="4" ng-model="userComment.rating">4
                               </label>
                             <label class="radio-inline">
-                                  <input type="radio" class="form-check-input" name="Stars" id="stars5" value="5" checked ng-model="userComment.stars">5
+                                  <input type="radio" class="form-check-input" name="rating" id="rating5" value="5" checked ng-model="userComment.rating">5
                               </label>
                         </div>
                     </fieldset>
-                    <div class="form-group">
-                        <label class="col-xs-12 col-sm-3 control-label" for="comments">Your Comments</label>
+                    <div class="form-group" ng-class="{ 'has-error has-feedback' : commentForm.comment.$error.required && !commentForm.$pristine }">
+                        <label class="col-xs-12 col-sm-3 control-label" for="comment">Your Comments</label>
                         <div class="col-xs-12 col-sm-9">
-                        <textarea rows="10" class="form-control" id="comments" ng-model="userComment.comments"></textarea>
+                        <textarea rows="10" class="form-control" id="comment" name="comment" ng-model="userComment.comment" required></textarea>
+                        <span ng-show="commentForm.comment.$error.required && !commentForm.$pristine" class="help-block">Please enter comments.</span>
                       </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <button type="button" class="btn btn-primary">Submit Comments</button>
+                            <button type="button" class="btn btn-primary" ng-disabled="commentForm.$invalid">Submit Comments</button>
                         </div>
                     </div>
                     <!-- emd -->

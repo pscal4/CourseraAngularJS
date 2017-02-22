@@ -146,7 +146,7 @@ angular.module('confusionApp', [])
                 },
                 {
                     rating: 4,
-                    comment: "Ultimate, Reaching for the stars!",
+                    comment: "Ultimate, Reaching for the rating!",
                     author: "Ringo Starry",
                     date: "2013-12-02T17:57:28.556094Z"
                 },
@@ -166,9 +166,9 @@ angular.module('confusionApp', [])
     .controller('DishCommentController', ['$scope', function($scope) {
         //Step 1: Create a JavaScript object to hold the comment from the form
         $scope.userComment = {
-            name: '',
-            stars: '5',
-            comments: ''
+            author: '',
+            rating: '5',
+            comment: ''
         };
         $scope.submitComment = function() {
             //                //Step 2: This is how you record the date
